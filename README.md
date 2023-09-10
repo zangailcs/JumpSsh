@@ -21,3 +21,23 @@ ssh -J user1@jump_host user2@target_host
 分屏终端：
 ![image text](https://github.com/zangailcs/JumpSsh/blob/main/example_images/multiTermPage.jpg "Multi Term page")
 
+## 如何使用：
+方式一：运行源码
+1. clone此仓库：
+```commandline
+git clone https://github.com/zangailcs/JumpSsh.git
+```
+
+2. pip安装必要的依赖
+```commandline
+pip install -r requirements.txt
+```
+
+3. 运行run.py
+```commandline
+python run.py
+```
+
+4. 创建示例虚拟机：可以参考本仓中附带的Vagrantfile，创建三个centos/7虚拟机，以尝试ssh功能
+
+方式二：暂无
