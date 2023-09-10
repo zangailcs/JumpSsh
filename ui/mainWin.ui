@@ -74,12 +74,12 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>2</x>
+      <x>3</x>
       <y>0</y>
-      <width>421</width>
+      <width>507</width>
       <height>25</height>
      </rect>
     </property>
@@ -119,6 +119,16 @@
        </property>
        <property name="text">
         <string>删除所选环境</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="enableTcpBtn">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 0, 0)</string>
+       </property>
+       <property name="text">
+        <string>使能端口转发</string>
        </property>
       </widget>
      </item>

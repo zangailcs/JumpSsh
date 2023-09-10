@@ -1,16 +1,19 @@
 import json
 import os.path as osp
+import time
 from functools import partial
 
+import paramiko
 from PySide2.QtCore import QRect
 from PySide2.QtGui import QCloseEvent
 from PySide2.QtWidgets import QMainWindow, QPushButton
 
 from change_env_dialog import ChangeEnvDialog
 from choose_node_dialog import ChooseNodeDialog
-from term_window import connect_curr_term
+from term_window import connect_curr_term, global_configs
 from ui.mainWin_ui import Ui_JumpSsh
-from utils import init_tree_data, close_term_tab, split_str, show_message, all_opened_term, cache_dir, all_accounts
+from utils import init_tree_data, close_term_tab, split_str, show_message, all_opened_term, cache_dir, all_accounts, \
+    match_any_key
 
 
 class MainWindow(QMainWindow):
@@ -24,12 +27,17 @@ class MainWindow(QMainWindow):
         init_tree_data(self.ui.iMasterTable)
         self.ui.singleTermContainer.tabCloseRequested.connect(lambda index:
                                                               close_term_tab(self.ui.singleTermContainer, index))
+        # 设置环境树与终端窗口之间的弹簧布局初始比例
         self.ui.splitter.setStretchFactor(1, 1)
+
+        # 环境信息管理相关按钮的事件绑定
         self.add_dia = ChangeEnvDialog(1)
         self.ui.addEnvBtn.clicked.connect(self.add_env_handler)
         self.update_dia = ChangeEnvDialog(2)
         self.ui.updateEnvBtn.clicked.connect(self.update_env_handler)
         self.ui.deleteBtn.clicked.connect(self.delete_env_handler)
+        self.ui.enableTcpBtn.clicked.connect(self.enable_tcp_handler)
+
         self.ui.openMultiTermBtn.clicked.connect(self.open_choose_node_dia)
         self.choose_node_dia = None
         self.quick_input_map = {}
@@ -68,6 +76,37 @@ class MainWindow(QMainWindow):
         cache_path = osp.join(cache_dir, item.text(0).split(split_str)[-1] + '.json')
         print(cache_path)
         # os.remove(cache_path)
+
+    def enable_tcp_handler(self):
+        item = self.check_selected_env(self.ui.iMasterTable.selectedItems())
+        if item is None:
+            return
+        ip = item.text(0).split(split_str)[-1]
+        account = all_accounts[item.text(0)]
+        ssh = paramiko.SSHClient()
+        key = paramiko.AutoAddPolicy()
+        ssh.set_missing_host_key_policy(key)
+        try:
+            ssh.connect(hostname=ip, port=22, username=account['username'], password=account['pwd'], timeout=50)
+            channel = ssh.invoke_shell()
+            channel.send("su - root\n")
+            buff = ''
+            while not match_any_key(global_configs['su_prompt'], buff):
+                resp = channel.recv(9999)
+                buff += resp.decode('utf-8')
+                print(buff)
+            channel.send(account['suPwd'] + '\n')
+            time.sleep(0.1)
+            channel.send("sed -i '/#AllowTcpForwarding yes/c\AllowTcpForwarding yes' /etc/ssh/sshd_config\n")
+            time.sleep(0.1)
+            channel.send("sed -i '/AllowTcpForwarding no/c\#AllowTcpForwarding no' /etc/ssh/sshd_config\n")
+            time.sleep(0.1)
+            channel.send("systemctl restart sshd.service\n")
+            time.sleep(0.1)
+        except paramiko.ssh_exception.AuthenticationException:
+            print('Failed to login. ip username or password not correct.')
+            exit(-1)
+        ssh.close()
 
     def check_selected_env(self, items):
         if len(items) != 1:

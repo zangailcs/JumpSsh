@@ -46,37 +46,43 @@ class Ui_JumpSsh(object):
         self.term2.setObjectName(u"term2")
         self.singleTermContainer.addTab(self.term2, "")
         self.splitter.addWidget(self.singleTermContainer)
-        self.layoutWidget = QWidget(self.centralwidget)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(2, 0, 421, 25))
-        self.horizontalLayout = QHBoxLayout(self.layoutWidget)
+        self.widget = QWidget(self.centralwidget)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(3, 0, 507, 25))
+        self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.addEnvBtn = QPushButton(self.layoutWidget)
+        self.addEnvBtn = QPushButton(self.widget)
         self.addEnvBtn.setObjectName(u"addEnvBtn")
 
         self.horizontalLayout.addWidget(self.addEnvBtn)
 
-        self.updateEnvBtn = QPushButton(self.layoutWidget)
+        self.updateEnvBtn = QPushButton(self.widget)
         self.updateEnvBtn.setObjectName(u"updateEnvBtn")
 
         self.horizontalLayout.addWidget(self.updateEnvBtn)
 
-        self.updateBtn = QPushButton(self.layoutWidget)
+        self.updateBtn = QPushButton(self.widget)
         self.updateBtn.setObjectName(u"updateBtn")
 
         self.horizontalLayout.addWidget(self.updateBtn)
 
-        self.openMultiTermBtn = QPushButton(self.layoutWidget)
+        self.openMultiTermBtn = QPushButton(self.widget)
         self.openMultiTermBtn.setObjectName(u"openMultiTermBtn")
 
         self.horizontalLayout.addWidget(self.openMultiTermBtn)
 
-        self.deleteBtn = QPushButton(self.layoutWidget)
+        self.deleteBtn = QPushButton(self.widget)
         self.deleteBtn.setObjectName(u"deleteBtn")
         self.deleteBtn.setStyleSheet(u"color: rgb(255, 0, 0)")
 
         self.horizontalLayout.addWidget(self.deleteBtn)
+
+        self.enableTcpBtn = QPushButton(self.widget)
+        self.enableTcpBtn.setObjectName(u"enableTcpBtn")
+        self.enableTcpBtn.setStyleSheet(u"color: rgb(255, 0, 0)")
+
+        self.horizontalLayout.addWidget(self.enableTcpBtn)
 
         JumpSsh.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(JumpSsh)
@@ -105,5 +111,6 @@ class Ui_JumpSsh(object):
         self.updateBtn.setText(QCoreApplication.translate("JumpSsh", u"\u66f4\u65b0\u8282\u70b9\u4fe1\u606f", None))
         self.openMultiTermBtn.setText(QCoreApplication.translate("JumpSsh", u"\u6253\u5f00\u5206\u5c4f\u7ec8\u7aef", None))
         self.deleteBtn.setText(QCoreApplication.translate("JumpSsh", u"\u5220\u9664\u6240\u9009\u73af\u5883", None))
+        self.enableTcpBtn.setText(QCoreApplication.translate("JumpSsh", u"\u4f7f\u80fd\u7aef\u53e3\u8f6c\u53d1", None))
     # retranslateUi
 
