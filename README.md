@@ -15,3 +15,9 @@ ssh -J user1@jump_host user2@target_host
 - 简单的分屏操作（同时输入命令到多终端）
 
 ## 示例图：
+主页：
+![image text](https://github.com/zangailcs/JumpSsh/blob/main/example_images/homePage.jpg "Home page")
+
+分屏终端：
+![image text](https://github.com/zangailcs/JumpSsh/blob/main/example_images/multiTermPage.jpg "Multi Term page")
+
