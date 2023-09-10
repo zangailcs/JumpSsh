@@ -1,0 +1,13 @@
+# 首次建连时需要输入yes/no，匹配提示语以自动输入yes
+first_ssh_prompt:
+  - "Are you sure you want to continue connecting"
+
+# 输入密码的提示词，多种匹配词以逗号分隔
+passwd_prompt:
+  - "'s password:"
+
+su_prompt:
+  - "Password: "
+
+# ssh终端窗口基于? windows一般支持：cmd、powershell
+pty_base: "cmd"

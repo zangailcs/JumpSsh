@@ -1,0 +1,21 @@
+{
+  "ip": "192.168.56.100",
+  "alias": "开发环境1",
+  "account": {
+    "username": "vagrant",
+    "pwd": "vagrant",
+    "suPwd": "vagrant"
+  },
+  "nodes": {
+    "NE_Mgr": {
+      "mgr01": "192.168.56.101"
+    },
+    "NMS": {
+      "nms01": "192.168.56.102"
+    },
+    "CommonService": {
+      "common_service01": "192.168.56.101",
+      "common_service02": "192.168.56.102"
+    }
+  }
+}
