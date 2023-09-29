@@ -2,6 +2,7 @@ import json
 import os
 import os.path as osp
 import time
+import jumpssh
 
 import yaml
 from PySide2.QtGui import QCloseEvent
@@ -74,4 +75,13 @@ def load_global_configs():
         config = yaml.load(f, Loader=yaml.FullLoader)
         print(config)
         return config
+
+
+def get_jump_ssn(jump_ip, uname, pwd):
+    try:
+        jump_ssn = jumpssh.SSHSession(jump_ip, uname, password=pwd)
+        return jump_ssn.open()
+    except Exception:
+        return None
+
 

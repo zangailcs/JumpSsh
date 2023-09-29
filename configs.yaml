@@ -11,3 +11,6 @@ su_prompt:
 
 # ssh终端窗口基于? windows一般支持：cmd、powershell
 pty_base: "cmd"
+
+ftp:
+  default_remote_path: /home/sopuser

@@ -74,7 +74,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>3</x>
@@ -133,6 +133,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="ftpBtn">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>0</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>文件传输</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
