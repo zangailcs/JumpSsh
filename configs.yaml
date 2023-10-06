@@ -13,4 +13,4 @@ su_prompt:
 pty_base: "cmd"
 
 ftp:
-  default_remote_path: /home/sopuser
+  default_remote_path: /home/vagrant

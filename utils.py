@@ -2,9 +2,11 @@ import json
 import os
 import os.path as osp
 import time
-import jumpssh
+import traceback
 
+import jumpssh
 import yaml
+from PySide2 import QtCore
 from PySide2.QtGui import QCloseEvent
 from PySide2.QtWidgets import QMessageBox, QTreeWidgetItem, QTabWidget
 
@@ -80,8 +82,28 @@ def load_global_configs():
 def get_jump_ssn(jump_ip, uname, pwd):
     try:
         jump_ssn = jumpssh.SSHSession(jump_ip, uname, password=pwd)
-        return jump_ssn.open()
+        jump_ssn.open()
+        return jump_ssn
     except Exception:
+        traceback.print_exc()
         return None
 
+
+def get_target_ssn(jump_ssn: jumpssh.SSHSession, target_ip, uname, pwd):
+    try:
+        ssn = jump_ssn.get_remote_session(target_ip, uname, password=pwd)
+        ssn.open()
+        return ssn
+    except Exception:
+        traceback.print_exc()
+        return None
+
+
+def get_checked_items(list_view):
+    model = list_view.model()
+    checked_items = []
+    for row in range(model.rowCount()):
+        if model.item(row).checkState() == QtCore.Qt.Checked:
+            checked_items.append(model.item(row).text())
+    return checked_items
 
