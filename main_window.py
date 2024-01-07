@@ -11,6 +11,7 @@ from PySide2.QtWidgets import QMainWindow, QPushButton
 from change_env_dialog import ChangeEnvDialog
 from choose_node_dialog import ChooseNodeDialog
 from ftp.ftp_dialog import FtpDialog
+from port_map.port_map_dialog import PortMapDialog
 from term_window import connect_curr_term, global_configs
 from ui.mainWin_ui import Ui_JumpSsh
 from utils import init_tree_data, close_term_tab, split_str, show_message, all_opened_term, cache_dir, all_accounts, \
@@ -41,6 +42,9 @@ class MainWindow(QMainWindow):
 
         self.ui.ftpBtn.clicked.connect(self.ftp_handler)
         self.ftp_dia = None
+
+        self.ui.portMapBtn.clicked.connect(self.port_map_handler)
+        self.port_map_dia = None
 
         self.ui.openMultiTermBtn.clicked.connect(self.open_choose_node_dia)
         self.choose_node_dia = None
@@ -73,6 +77,19 @@ class MainWindow(QMainWindow):
         account = all_accounts.get(item.text(0))
         self.ftp_dia = FtpDialog(item.text(0).split(split_str)[-1], all_node_list, account)
         self.ftp_dia.open_dialog()
+
+    def port_map_handler(self):
+        item = self.check_selected_env(self.ui.iMasterTable.selectedItems())
+        if item is None:
+            return
+        all_node_list = []
+        for index in range(item.childCount()):
+            nodes_item = item.child(index)
+            for node_idx in range(nodes_item.childCount()):
+                all_node_list.append(nodes_item.child(node_idx).text(0))
+        account = all_accounts.get(item.text(0))
+        self.port_map_dia = PortMapDialog(item.text(0).split(split_str)[-1], all_node_list, account)
+        self.port_map_dia.open_dialog()
 
     def add_env_handler(self):
         self.add_dia.open_dialog()

@@ -87,6 +87,9 @@ class Ui_JumpSsh(object):
         self.ftpBtn = QPushButton(self.centralwidget)
         self.ftpBtn.setObjectName(u"ftpBtn")
         self.ftpBtn.setGeometry(QRect(520, 0, 75, 23))
+        self.portMapBtn = QPushButton(self.centralwidget)
+        self.portMapBtn.setObjectName(u"portMapBtn")
+        self.portMapBtn.setGeometry(QRect(600, 0, 75, 23))
         JumpSsh.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(JumpSsh)
         self.menubar.setObjectName(u"menubar")
@@ -116,5 +119,6 @@ class Ui_JumpSsh(object):
         self.deleteBtn.setText(QCoreApplication.translate("JumpSsh", u"\u5220\u9664\u6240\u9009\u73af\u5883", None))
         self.enableTcpBtn.setText(QCoreApplication.translate("JumpSsh", u"\u4f7f\u80fd\u7aef\u53e3\u8f6c\u53d1", None))
         self.ftpBtn.setText(QCoreApplication.translate("JumpSsh", u"\u6587\u4ef6\u4f20\u8f93", None))
+        self.portMapBtn.setText(QCoreApplication.translate("JumpSsh", u"\u7aef\u53e3\u6620\u5c04", None))
     # retranslateUi
 

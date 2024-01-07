@@ -147,6 +147,19 @@
      <string>文件传输</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="portMapBtn">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>0</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>端口映射</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
